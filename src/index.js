@@ -20,7 +20,9 @@ refs.buttonLoadMore.addEventListener('click', onClick);
 async function onClick(e) {
     const image = await newsApiServise.fetchImage();
     refs.gallery.insertAdjacentHTML('beforeend', createMarkup(image));
-    gallerySimpleLightbox.refresh();
+  gallerySimpleLightbox.refresh();
+  console.log(newsApiServise.hits);
+  console.log(newsApiServise.currentHits);
     if (newsApiServise.hits <= newsApiServise.currentHits) {
         refs.buttonLoadMore.style.display = 'none';
         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
@@ -55,6 +57,10 @@ async function onSubmit(e) {
         refs.gallery.insertAdjacentHTML('beforeend', createMarkup(image));
         gallerySimpleLightbox.refresh();
         form.reset();
+  }
+   if (newsApiServise.hits <= newsApiServise.currentHits) {
+        refs.buttonLoadMore.style.display = 'none';
+     Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
     }
 }
 
